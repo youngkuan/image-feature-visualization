@@ -19,7 +19,6 @@ def parse_category(root):
     category_file = os.path.join(root, "categories.json")
 
     image2categories = parse_json(category_file)
-    print(type(image2categories))
 
     category_set = set()
     for image_name, category in image2categories.items():

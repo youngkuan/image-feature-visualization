@@ -41,7 +41,7 @@ parser.add_argument('-j', '--workers', default=4, type=int, metavar='N',
                     help='number of data loading workers (default: 4)')
 parser.add_argument('-m', '--pin-memory', dest='pin_memory', action='store_true',
                     help='use pin memory')
-parser.add_argument('-p', '--pretrained', dest='pretrained', action='store_true',default=True,
+parser.add_argument('-p', '--pretrained', dest='pretrained', action='store_true',default=False,
                     help='use pre-trained model')
 parser.add_argument('--print-freq', '-f', default=10, type=int, metavar='N',
                     help='print frequency (default: 10)')
