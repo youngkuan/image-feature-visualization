@@ -73,11 +73,36 @@ def split_images(root, image2categories):
             shutil.move(src, dst)
 
 
+def split_images2(root, image2categories):
+    """
+    处理AI2D中的图像，把图像分成训练测试集，并划分到不同文件夹中
+    :return:
+    """
+    train_folder = os.path.join(root, "classification_train")
+    val_folder = os.path.join(root, "classification_val")
+    images_path = os.path.join(root, 'images')
+
+    image_names = os.listdir(images_path)
+    train_num = len(image_names) * 4 // 5
+
+    i = 0
+    for image_name, category in image2categories.items:
+        if i < train_num:
+            src = os.path.join(images_path, image_name)
+            dst = os.path.join(train_folder, category)
+            shutil.copy(src, dst)
+        else:
+            src = os.path.join(images_path, image_name)
+            dst = os.path.join(val_folder, category)
+            shutil.copy(src, dst)
+        i += 1
+
+
 def main():
     root = "/home/yangkuan/data/"
     image2categories, categories = parse_category(root)
     make_corresponding_folder(root, categories)
-    split_images(root, image2categories)
+    split_images2(root, image2categories)
 
 
 if __name__ == '__main__':
