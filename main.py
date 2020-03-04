@@ -11,6 +11,8 @@ from models import *
 from data_loader import data_loader
 from helper import AverageMeter, save_checkpoint, accuracy, adjust_learning_rate
 
+#os.environ['CUDA_VISIBLE_DEVICES'] = '2'
+
 model_names = [
     'alexnet', 'squeezenet1_0', 'squeezenet1_1', 'densenet121',
     'densenet169', 'densenet201', 'densenet201', 'densenet161',
@@ -20,16 +22,16 @@ model_names = [
 ]
 
 parser = argparse.ArgumentParser(description='PyTorch ImageNet Training')
-parser.add_argument('data', metavar='DIR', help='path to dataset')
-parser.add_argument('-a', '--arch', metavar='ARCH', default='alexnet', choices=model_names,
+parser.add_argument('--data', help='path to dataset',default='/home/yangkuan/data/ai2d/')
+parser.add_argument('-a', '--arch', metavar='ARCH', default='vgg16_bn', choices=model_names,
                     help='model architecture: ' + ' | '.join(model_names) + ' (default: alexnet)')
 parser.add_argument('--epochs', default=90, type=int, metavar='N',
                     help='numer of total epochs to run')
 parser.add_argument('--start-epoch', default=0, type=int, metavar='N',
                     help='manual epoch number (useful to restarts)')
-parser.add_argument('-b', '--batch-size', default=256, type=int, metavar='N',
+parser.add_argument('-b', '--batch-size', default=32, type=int, metavar='N',
                     help='mini-batch size (default: 256)')
-parser.add_argument('--lr', '--learning-rate', default=0.01, type=float, metavar='LR',
+parser.add_argument('--lr', '--learning-rate', default=0.001, type=float, metavar='LR',
                     help='initial learning rate')
 parser.add_argument('--momentum', default=0.9, type=float, metavar='M',
                     help='momentum')
@@ -39,7 +41,7 @@ parser.add_argument('-j', '--workers', default=4, type=int, metavar='N',
                     help='number of data loading workers (default: 4)')
 parser.add_argument('-m', '--pin-memory', dest='pin_memory', action='store_true',
                     help='use pin memory')
-parser.add_argument('-p', '--pretrained', dest='pretrained', action='store_true',
+parser.add_argument('-p', '--pretrained', dest='pretrained', action='store_true',default=True,
                     help='use pre-trained model')
 parser.add_argument('--print-freq', '-f', default=10, type=int, metavar='N',
                     help='print frequency (default: 10)')
@@ -246,7 +248,6 @@ def validate(val_loader, model, criterion, print_freq):
     print(' * Prec@1 {top1.avg:.3f} Prec@5 {top5.avg:.3f}'.format(top1=top1, top5=top5))
 
     return top1.avg, top5.avg
-
 
 if __name__ == '__main__':
     main()

@@ -6,8 +6,10 @@ import torchvision.datasets as datasets
 
 
 def data_loader(root, batch_size=256, workers=1, pin_memory=True):
-    traindir = os.path.join(root, 'ILSVRC2012_img_train')
-    valdir = os.path.join(root, 'ILSVRC2012_img_val')
+    # traindir = os.path.join(root, 'ILSVRC2012_img_train')
+    traindir = os.path.join(root, 'classification_train')
+    # valdir = os.path.join(root, 'ILSVRC2012_img_val')
+    valdir = os.path.join(root, 'classification_val')
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                      std=[0.229, 0.224, 0.225])
 

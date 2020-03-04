@@ -19,9 +19,10 @@ def parse_category(root):
     category_file = os.path.join(root, "categories.json")
 
     image2categories = parse_json(category_file)
+    print(type(image2categories))
 
     category_set = set()
-    for image_name, category in image2categories.items:
+    for image_name, category in image2categories.items():
         if category not in category_set:
             category_set.add(category)
     return image2categories, category_set
@@ -55,7 +56,7 @@ def split_images(root, image2categories):
     val_folder = os.path.join(root, "classification_val")
     images_path = os.path.join(root, 'images')
 
-    for image_name, category in image2categories.items:
+    for image_name, category in image2categories.items():
         src = os.path.join(images_path, image_name)
         dst = os.path.join(train_folder, category)
         shutil.copy(src, dst)
@@ -99,7 +100,7 @@ def split_images2(root, image2categories):
 
 
 def main():
-    root = "/home/yangkuan/data/"
+    root = "/home/yangkuan/data/ai2d/"
     image2categories, categories = parse_category(root)
     make_corresponding_folder(root, categories)
     split_images2(root, image2categories)
