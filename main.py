@@ -184,7 +184,7 @@ def train(train_loader, model, criterion, optimizer, epoch, print_freq):
         prec1, prec5 = accuracy(output.data, target, topk=(1, 5))
         losses.update(loss.item(), input.size(0))
         top1.update(prec1[0], input.size(0))
-        top5.update(prec1[0], input.size(0))
+        top5.update(prec5[0], input.size(0))
 
         # compute gradient and do SGD step
         optimizer.zero_grad()
